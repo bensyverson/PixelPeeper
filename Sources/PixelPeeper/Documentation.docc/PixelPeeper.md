@@ -33,6 +33,10 @@ print("MAE: \(result.mae)") // 0.0 = identical, 100.0 = maximally different
 
 - ``PixelImage``
 
+### Pixel Colors
+
+- ``PixelColor``
+
 ### Errors
 
 - ``PixelPeeperError``

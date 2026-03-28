@@ -38,6 +38,16 @@ struct PixelPeeperErrorTests {
         #expect(error.description.contains("400"))
     }
 
+    @Test("coordinateOutOfBounds includes coordinates and dimensions in its description")
+    func coordinateOutOfBoundsDescription() {
+        let error = PixelPeeperError.coordinateOutOfBounds(x: 5, y: 10, width: 3, height: 8)
+
+        #expect(error.description.contains("5"))
+        #expect(error.description.contains("10"))
+        #expect(error.description.contains("3"))
+        #expect(error.description.contains("8"))
+    }
+
     @Test("conforms to Equatable")
     func equatable() {
         let a = PixelPeeperError.fileNotFound(path: "/a.png")

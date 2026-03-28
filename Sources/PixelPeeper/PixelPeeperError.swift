@@ -12,6 +12,9 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
     /// The two images have different dimensions.
     case dimensionMismatch(width1: Int, height1: Int, width2: Int, height2: Int)
 
+    /// The given pixel coordinates are outside the image bounds.
+    case coordinateOutOfBounds(x: Int, y: Int, width: Int, height: Int)
+
     public var description: String {
         switch self {
         case let .fileNotFound(path):
@@ -22,6 +25,8 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
             "Failed to extract pixel data from image at \(path)"
         case let .dimensionMismatch(width1, height1, width2, height2):
             "Dimension mismatch: first image is \(width1)×\(height1), second image is \(width2)×\(height2)"
+        case let .coordinateOutOfBounds(x, y, width, height):
+            "Coordinate (\(x), \(y)) is out of bounds for image of size \(width)×\(height)"
         }
     }
 }

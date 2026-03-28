@@ -1,7 +1,7 @@
 import Foundation
 import PixelPeeper
 
-extension PeepCommand {
+extension CompareCommand {
     /// Formats a comparison result as a human-readable text summary.
     ///
     /// - Parameter result: The comparison result to format.
@@ -36,6 +36,6 @@ extension PeepCommand {
 
     /// Formats a Double value to one decimal place, removing trailing zeros.
     private static func formatValue(_ value: Double) -> String {
-        return String(format: "%.1f", value)
+        String(format: "%.1f", value)
     }
 }
