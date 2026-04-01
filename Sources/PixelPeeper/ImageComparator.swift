@@ -28,7 +28,7 @@ public enum ImageComparator {
     public static func compare(
         _ image1: PixelImage,
         _ image2: PixelImage,
-        options: ComparisonOptions = .default
+        options: ComparisonOptions = .default,
     ) throws -> ImageComparisonResult {
         var img1 = image1
         var img2 = image2
@@ -38,7 +38,7 @@ public enum ImageComparator {
             case .error:
                 throw PixelPeeperError.dimensionMismatch(
                     width1: img1.width, height1: img1.height,
-                    width2: img2.width, height2: img2.height
+                    width2: img2.width, height2: img2.height,
                 )
             case .resizeToSmallest:
                 let targetWidth = min(img1.width, img2.width)
@@ -85,7 +85,7 @@ public enum ImageComparator {
             red: normalizedRed,
             green: normalizedGreen,
             blue: normalizedBlue,
-            alpha: normalizedAlpha
+            alpha: normalizedAlpha,
         )
     }
 }

@@ -80,7 +80,7 @@ struct ImageComparatorTests {
 
         #expect(throws: PixelPeeperError.dimensionMismatch(
             width1: 2, height1: 2,
-            width2: 3, height2: 3
+            width2: 3, height2: 3,
         )) {
             try ImageComparator.compare(small, large)
         }
@@ -115,7 +115,7 @@ struct ImageComparatorTests {
 
     private func solidImage(
         red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8,
-        width: Int, height: Int
+        width: Int, height: Int,
     ) -> PixelImage {
         let pixelCount = width * height
         var pixels = [UInt8](repeating: 0, count: pixelCount * 4)

@@ -6,7 +6,7 @@ import PixelPeeper
 struct SampleCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "sample",
-        abstract: "Sample the color of a pixel at given coordinates."
+        abstract: "Sample the color of a pixel at given coordinates.",
     )
 
     /// Output format for the sampled color.

@@ -54,7 +54,7 @@ public extension PixelImage {
         guard let page = document.page(at: 1) else {
             throw PixelPeeperError.imageLoadFailed(
                 path: url.path,
-                reason: "PDF has no pages"
+                reason: "PDF has no pages",
             )
         }
 
@@ -71,7 +71,7 @@ public extension PixelImage {
         guard let context = CGContext(
             data: &pixels, width: width, height: height,
             bitsPerComponent: 8, bytesPerRow: bytesPerRow,
-            space: colorSpace, bitmapInfo: bitmapInfo
+            space: colorSpace, bitmapInfo: bitmapInfo,
         ) else {
             throw PixelPeeperError.pixelExtractionFailed(path: url.path)
         }

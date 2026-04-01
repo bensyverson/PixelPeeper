@@ -12,11 +12,11 @@ let package = Package(
     products: [
         .library(
             name: "PixelPeeper",
-            targets: ["PixelPeeper"]
+            targets: ["PixelPeeper"],
         ),
         .executable(
             name: "peep",
-            targets: ["PeepCommand"]
+            targets: ["PeepCommand"],
         ),
     ],
     dependencies: [
@@ -25,26 +25,30 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "PixelPeeper"
+            name: "PixelPeeper",
         ),
         .executableTarget(
             name: "PeepCommand",
             dependencies: [
                 "PixelPeeper",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            ]
+            ],
         ),
         .testTarget(
             name: "PixelPeeperTests",
             dependencies: ["PixelPeeper"],
             resources: [
                 .copy("Fixtures"),
-            ]
+            ],
         ),
         .testTarget(
             name: "PeepCommandTests",
-            dependencies: ["PeepCommand", "PixelPeeper"]
+            dependencies: [
+                "PeepCommand",
+                "PixelPeeper",
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+            ],
         ),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v6],
 )

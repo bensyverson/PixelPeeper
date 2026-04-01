@@ -24,7 +24,7 @@ extension PixelImage {
         guard let context = CGContext(
             data: &pixels, width: width, height: height,
             bitsPerComponent: 8, bytesPerRow: bytesPerRow,
-            space: colorSpace, bitmapInfo: bitmapInfo
+            space: colorSpace, bitmapInfo: bitmapInfo,
         ) else {
             throw PixelPeeperError.pixelExtractionFailed(path: sourcePath)
         }

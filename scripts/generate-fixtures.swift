@@ -52,7 +52,7 @@ for spec in fixtures {
     guard let ctx = CGContext(
         data: &pixels, width: spec.width, height: spec.height,
         bitsPerComponent: 8, bytesPerRow: bpr,
-        space: colorSpace, bitmapInfo: bitmapInfo
+        space: colorSpace, bitmapInfo: bitmapInfo,
     ) else {
         print("Failed to create context for \(spec.name)")
         continue

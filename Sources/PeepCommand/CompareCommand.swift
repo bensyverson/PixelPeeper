@@ -6,7 +6,7 @@ import PixelPeeper
 struct CompareCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "compare",
-        abstract: "Compute Mean Absolute Error (MAE) between two images."
+        abstract: "Compute Mean Absolute Error (MAE) between two images.",
     )
 
     /// Output format for comparison results.
@@ -47,7 +47,7 @@ struct CompareCommand: AsyncParsableCommand {
         let img2 = try PixelImage.load(from: url2, scale: scale)
 
         let options = ComparisonOptions(
-            dimensionMismatch: resize ? .resizeToSmallest : .error
+            dimensionMismatch: resize ? .resizeToSmallest : .error,
         )
 
         let result = try ImageComparator.compare(img1, img2, options: options)

@@ -15,6 +15,15 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
     /// The given pixel coordinates are outside the image bounds.
     case coordinateOutOfBounds(x: Int, y: Int, width: Int, height: Int)
 
+    /// The hex color string is invalid.
+    case invalidHexColor(String)
+
+    /// The crop region is invalid for the given image dimensions.
+    case invalidCropRegion(x: Int, y: Int, width: Int, height: Int, imageWidth: Int, imageHeight: Int)
+
+    /// The step count is invalid (must be at least 2).
+    case invalidStepCount(Int)
+
     public var description: String {
         switch self {
         case let .fileNotFound(path):
@@ -27,6 +36,12 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
             "Dimension mismatch: first image is \(width1)×\(height1), second image is \(width2)×\(height2)"
         case let .coordinateOutOfBounds(x, y, width, height):
             "Coordinate (\(x), \(y)) is out of bounds for image of size \(width)×\(height)"
+        case let .invalidHexColor(hex):
+            "Invalid hex color: \(hex)"
+        case let .invalidCropRegion(x, y, width, height, imageWidth, imageHeight):
+            "Invalid crop region (\(x), \(y), \(width)×\(height)) for image of size \(imageWidth)×\(imageHeight)"
+        case let .invalidStepCount(steps):
+            "Invalid step count: \(steps) (must be at least 2)"
         }
     }
 }

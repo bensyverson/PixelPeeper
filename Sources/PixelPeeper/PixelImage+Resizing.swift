@@ -1,6 +1,6 @@
 import CoreGraphics
 
-extension PixelImage {
+public extension PixelImage {
     /// Returns a new image resized to the given dimensions using bilinear interpolation.
     ///
     /// The pixel data is reconstructed into a `CGImage`, drawn into a new context at the
@@ -21,7 +21,7 @@ extension PixelImage {
         guard let sourceContext = CGContext(
             data: &sourcePixels, width: width, height: height,
             bitsPerComponent: 8, bytesPerRow: width * 4,
-            space: colorSpace, bitmapInfo: bitmapInfo
+            space: colorSpace, bitmapInfo: bitmapInfo,
         ), let cgImage = sourceContext.makeImage() else {
             throw PixelPeeperError.pixelExtractionFailed(path: "<resize>")
         }
@@ -33,7 +33,7 @@ extension PixelImage {
         guard let targetContext = CGContext(
             data: &targetPixels, width: targetWidth, height: targetHeight,
             bitsPerComponent: 8, bytesPerRow: targetBytesPerRow,
-            space: colorSpace, bitmapInfo: bitmapInfo
+            space: colorSpace, bitmapInfo: bitmapInfo,
         ) else {
             throw PixelPeeperError.pixelExtractionFailed(path: "<resize>")
         }

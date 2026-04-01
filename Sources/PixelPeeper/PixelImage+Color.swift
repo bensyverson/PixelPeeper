@@ -12,7 +12,7 @@ public extension PixelImage {
     func color(atX x: Int, y: Int) throws -> PixelColor {
         guard x >= 0, x < width, y >= 0, y < height else {
             throw PixelPeeperError.coordinateOutOfBounds(
-                x: x, y: y, width: width, height: height
+                x: x, y: y, width: width, height: height,
             )
         }
 
@@ -21,7 +21,7 @@ public extension PixelImage {
             red: pixels[offset],
             green: pixels[offset + 1],
             blue: pixels[offset + 2],
-            alpha: pixels[offset + 3]
+            alpha: pixels[offset + 3],
         )
     }
 }

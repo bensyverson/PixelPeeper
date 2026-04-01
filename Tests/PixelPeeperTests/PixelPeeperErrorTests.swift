@@ -29,7 +29,7 @@ struct PixelPeeperErrorTests {
     func dimensionMismatchDescription() {
         let error = PixelPeeperError.dimensionMismatch(
             width1: 100, height1: 200,
-            width2: 300, height2: 400
+            width2: 300, height2: 400,
         )
 
         #expect(error.description.contains("100"))
@@ -46,6 +46,35 @@ struct PixelPeeperErrorTests {
         #expect(error.description.contains("10"))
         #expect(error.description.contains("3"))
         #expect(error.description.contains("8"))
+    }
+
+    @Test("invalidHexColor includes the hex string in its description")
+    func invalidHexColorDescription() {
+        let error = PixelPeeperError.invalidHexColor("zzzzzz")
+
+        #expect(error.description.contains("zzzzzz"))
+    }
+
+    @Test("invalidCropRegion includes region and image dimensions in its description")
+    func invalidCropRegionDescription() {
+        let error = PixelPeeperError.invalidCropRegion(
+            x: 10, y: 20, width: 50, height: 60,
+            imageWidth: 100, imageHeight: 200,
+        )
+
+        #expect(error.description.contains("10"))
+        #expect(error.description.contains("20"))
+        #expect(error.description.contains("50"))
+        #expect(error.description.contains("60"))
+        #expect(error.description.contains("100"))
+        #expect(error.description.contains("200"))
+    }
+
+    @Test("invalidStepCount includes the step count in its description")
+    func invalidStepCountDescription() {
+        let error = PixelPeeperError.invalidStepCount(1)
+
+        #expect(error.description.contains("1"))
     }
 
     @Test("conforms to Equatable")

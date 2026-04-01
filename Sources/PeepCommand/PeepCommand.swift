@@ -6,6 +6,13 @@ struct PeepCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "peep",
         abstract: "Image comparison and pixel sampling tools.",
-        subcommands: [CompareCommand.self, SampleCommand.self]
+        subcommands: [
+            CompareCommand.self,
+            SampleCommand.self,
+            CropCommand.self,
+            LineSampleCommand.self,
+            GridCommand.self,
+            DiffCommand.self,
+        ],
     )
 }
