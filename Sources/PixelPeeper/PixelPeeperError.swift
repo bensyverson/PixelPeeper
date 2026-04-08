@@ -24,6 +24,9 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
     /// The step count is invalid (must be at least 2).
     case invalidStepCount(Int)
 
+    /// Pixel data could not be extracted from an in-memory CGImage.
+    case cgImageExtractionFailed
+
     public var description: String {
         switch self {
         case let .fileNotFound(path):
@@ -42,6 +45,8 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
             "Invalid crop region (\(x), \(y), \(width)×\(height)) for image of size \(imageWidth)×\(imageHeight)"
         case let .invalidStepCount(steps):
             "Invalid step count: \(steps) (must be at least 2)"
+        case .cgImageExtractionFailed:
+            "Failed to extract pixel data from CGImage"
         }
     }
 }
