@@ -11,6 +11,10 @@ overall MAE score and per-channel breakdowns (red, green, blue, alpha).
 Supports bitmap formats (PNG, JPEG, TIFF, etc.) and PDF. PDFs are rasterized at a
 configurable scale factor (default 2x).
 
+It also draws *overlays*: labelled rulers, boxes and tags burned onto an image in the
+caller's own coordinates, so an agent or a reviewer reading a screenshot can name a
+position instead of estimating one.
+
 The library is designed for use cases like visual regression testing, CI pipelines,
 and image comparison tooling.
 
@@ -32,6 +36,16 @@ print("MAE: \(result.mae)") // 0.0 = identical, 100.0 = maximally different
 ### Loading Images
 
 - ``PixelImage``
+
+### Overlays
+
+- ``PixelImage/withGrid(_:pixelsPerPoint:origin:)``
+- ``PixelImage/withOutlines(_:pixelsPerPoint:origin:)``
+- ``PixelImage/withLabels(_:pixelsPerPoint:origin:)``
+- ``GridOptions``
+- ``GridLayout``
+- ``Outline``
+- ``OverlayLabel``
 
 ### Pixel Colors
 

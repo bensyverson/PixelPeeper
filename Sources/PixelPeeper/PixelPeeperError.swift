@@ -27,6 +27,15 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
     /// Pixel data could not be extracted from an in-memory CGImage.
     case cgImageExtractionFailed
 
+    /// The pixels-per-source-unit ratio an overlay was given is not positive.
+    case invalidOverlayScale(Double)
+
+    /// The grid step is invalid (must be at least 1 source unit).
+    case invalidGridStep(Int)
+
+    /// An overlay's bitmap could not be built or read back.
+    case overlayRenderFailed(width: Int, height: Int)
+
     public var description: String {
         switch self {
         case let .fileNotFound(path):
@@ -47,6 +56,12 @@ public enum PixelPeeperError: Error, CustomStringConvertible, Equatable, Sendabl
             "Invalid step count: \(steps) (must be at least 2)"
         case .cgImageExtractionFailed:
             "Failed to extract pixel data from CGImage"
+        case let .invalidOverlayScale(scale):
+            "Invalid overlay scale: \(scale) (pixels per source unit must be above 0)"
+        case let .invalidGridStep(step):
+            "Invalid grid step: \(step) (must be at least 1 source unit)"
+        case let .overlayRenderFailed(width, height):
+            "Could not build a \(width)×\(height) bitmap for the overlay"
         }
     }
 }

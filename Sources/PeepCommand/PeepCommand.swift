@@ -12,6 +12,7 @@ struct PeepCommand: AsyncParsableCommand {
             CropCommand.self,
             LineSampleCommand.self,
             GridCommand.self,
+            OutlineCommand.self,
             DiffCommand.self,
         ],
     )

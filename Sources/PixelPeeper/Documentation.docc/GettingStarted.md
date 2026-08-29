@@ -42,6 +42,40 @@ let options = ComparisonOptions(dimensionMismatch: .resizeToSmallest)
 let result = try ImageComparator.compare(image1, image2, options: options)
 ```
 
+## Drawing Overlays
+
+An overlay answers "where is this, in *my* coordinates?" — the question a screenshot
+cannot answer on its own. Every overlay takes `pixelsPerPoint`, the ratio between image
+pixels and whatever units the caller thinks in (layout points, CSS px), and an optional
+`origin`, the source coordinate of the image's top-left pixel when the image is a crop.
+Labels are always printed in source units.
+
+```swift
+// A 400-point layout rendered 800 pixels wide.
+let shot = try PixelImage.load(from: url)
+
+// Rulers in a gutter, numbered 0, 100, 200, 300 — not 0, 200, 400, 600.
+let gridded = try shot.withGrid(GridOptions(step: 100), pixelsPerPoint: 2)
+
+// A box around a node's layout rect, drawn outside it so the node's own edge shows.
+let boxed = try shot.withOutlines([
+    Outline(rect: header.frame, label: "Header"),
+], pixelsPerPoint: 2)
+
+// A free-standing tag, for a landmark that is not a rectangle.
+let marked = try shot.withLabels([
+    OverlayLabel(text: "click", position: CGPoint(x: 120, y: 64)),
+], pixelsPerPoint: 2)
+```
+
+Draw the grid **last**, after any resizing: the gutter is chrome, and fitting it down
+with the image makes the numbers unreadable. In ``GridOptions/Mode/rulers`` the image's
+own pixels come through byte for byte, so a gridded capture can still be diffed.
+
+``PixelImage/withGridOverlay(spacing:color:)`` is a different, older thing: an unlabelled
+grid measured in image pixels. Reach for ``PixelImage/withGrid(_:pixelsPerPoint:origin:)``
+when you want numbers.
+
 ## Using the CLI
 
 The `peep` command compares two images from the terminal:
@@ -95,6 +129,24 @@ peep grid image.png --spacing 10 --output grid.png
 # Custom color
 peep grid image.png --spacing 20 --color "#00ff00" --output grid.png
 ```
+
+### Outlines
+
+Box a region of an image, in the coordinates that produced it:
+
+```bash
+# A box around 10,20 100×50 in source units, on an image rendered at 2 px per unit
+peep outline shot.png --rect 10,20,100,50 --scale 2 --out boxed.png
+
+# Several boxes, named, in a colour of your choosing
+peep outline shot.png \
+  --rect 0,0,320,64 --label Header \
+  --rect 0,64,320,400 --label Body \
+  --color "#ff00aa" --scale 2 --out boxed.png
+```
+
+`--scale` is image pixels per source unit. `--raster-scale` is the separate knob for
+rasterizing a PDF input.
 
 ### Visual Diff
 
