@@ -70,7 +70,7 @@ struct CompareCommandTests {
 
     @Test("formats text output with overall and per-channel MAE")
     func textFormatting() {
-        let result = ImageComparisonResult(mae: 2.1, red: 1.0, green: 0.1, blue: 1.0, alpha: 0.0)
+        let result = ImageComparisonResult(mae: 2.1, maeSteps: 5.355, red: 1.0, green: 0.1, blue: 1.0, alpha: 0.0)
         let output = CompareCommand.formatText(result)
 
         #expect(output.contains("MAE: 2.1"))
@@ -82,10 +82,11 @@ struct CompareCommandTests {
 
     @Test("formats JSON output with all fields")
     func jsonFormatting() throws {
-        let result = ImageComparisonResult(mae: 2.1, red: 1.0, green: 0.1, blue: 1.0, alpha: 0.0)
+        let result = ImageComparisonResult(mae: 2.1, maeSteps: 5.355, red: 1.0, green: 0.1, blue: 1.0, alpha: 0.0)
         let output = try CompareCommand.formatJSON(result)
 
         #expect(output.contains("\"mae\""))
+        #expect(output.contains("\"maeSteps\" : 5.355"))
         #expect(output.contains("\"red\""))
         #expect(output.contains("\"green\""))
         #expect(output.contains("\"blue\""))

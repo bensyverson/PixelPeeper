@@ -39,7 +39,8 @@ let image1 = try PixelImage.load(from: url1)
 let image2 = try PixelImage.load(from: url2)
 let result = try ImageComparator.compare(image1, image2)
 
-print("MAE: \(result.mae)")  // 0–100 scale
+print("MAE: \(result.maeSteps)")  // 8-bit channel steps, 0–255
+print("MAE: \(result.mae)")       // 0–100 scale
 ```
 
 Overlays draw rulers, boxes and tags onto an image, numbered in **your** coordinates

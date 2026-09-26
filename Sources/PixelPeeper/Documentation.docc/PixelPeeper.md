@@ -5,8 +5,9 @@ A Swift library for computing Mean Absolute Error (MAE) between two images.
 ## Overview
 
 PixelPeeper loads images, extracts their pixel data into a standardized sRGB RGBA format,
-and computes the Mean Absolute Error between them on a 0–100 scale. It provides both an
-overall MAE score and per-channel breakdowns (red, green, blue, alpha).
+and computes the Mean Absolute Error between them. It provides an overall MAE score in
+8-bit channel steps (0–255, ``ImageComparisonResult/maeSteps``), and on a 0–100 scale
+both overall and per channel (red, green, blue, alpha).
 
 Supports bitmap formats (PNG, JPEG, TIFF, etc.) and PDF. PDFs are rasterized at a
 configurable scale factor (default 2x).
@@ -22,7 +23,8 @@ and image comparison tooling.
 let image1 = try PixelImage.load(from: url1)
 let image2 = try PixelImage.load(from: url2)
 let result = try ImageComparator.compare(image1, image2)
-print("MAE: \(result.mae)") // 0.0 = identical, 100.0 = maximally different
+print("MAE: \(result.maeSteps)") // "0.0 steps" = identical, "255.0 steps" = maximally different
+print("MAE: \(result.mae)")      // the same on a 0–100 scale
 ```
 
 ## Topics
@@ -31,11 +33,14 @@ print("MAE: \(result.mae)") // 0.0 = identical, 100.0 = maximally different
 
 - ``ImageComparator``
 - ``ImageComparisonResult``
+- ``EightBitSteps``
 - ``ComparisonOptions``
 
 ### Loading Images
 
 - ``PixelImage``
+- ``PixelImage/init(cgImage:)``
+- ``PixelImage/init(cgImage:width:height:)``
 
 ### Overlays
 

@@ -27,7 +27,8 @@ let image2 = try PixelImage.load(from: URL(fileURLWithPath: "after.png"))
 
 let result = try ImageComparator.compare(image1, image2)
 
-print("Overall MAE: \(result.mae)")
+print("Overall MAE: \(result.maeSteps)") // in 8-bit channel steps, 0–255
+print("Overall MAE: \(result.mae)")      // the same on a 0–100 scale
 print("Red: \(result.red), Green: \(result.green)")
 print("Blue: \(result.blue), Alpha: \(result.alpha)")
 ```
@@ -40,6 +41,28 @@ resize the larger image to match the smaller one:
 ```swift
 let options = ComparisonOptions(dimensionMismatch: .resizeToSmallest)
 let result = try ImageComparator.compare(image1, image2, options: options)
+```
+
+Resampling blurs both images a little. To compare only the area both images cover,
+anchored at the top-left and without resampling — for a capture that ran taller or wider
+than its reference — crop to the overlap instead:
+
+```swift
+let options = ComparisonOptions(dimensionMismatch: .cropToOverlap)
+let result = try ImageComparator.compare(image1, image2, options: options)
+```
+
+When the images start as `CGImage`s — a render and a reference PNG at different scales —
+decode both straight onto one pixel grid instead. The source is resampled once, as it is
+drawn, rather than after it has been rounded to 8 bits:
+
+```swift
+let width = min(render.width, reference.width)
+let height = min(render.height, reference.height)
+let result = try ImageComparator.compare(
+    PixelImage(cgImage: render, width: width, height: height),
+    PixelImage(cgImage: reference, width: width, height: height),
+)
 ```
 
 ## Drawing Overlays
@@ -165,7 +188,14 @@ peep diff image-1x.png image-2x.png --output diff.png --resize
 
 ## Understanding MAE Scores
 
-MAE scores range from 0 to 100:
+``ImageComparisonResult/maeSteps`` is the overall score in 8-bit channel steps: the mean
+absolute difference of every channel byte (alpha included, premultiplied sRGB), from 0
+(identical) to 255. One step is the smallest difference a byte can hold, so a threshold of
+1 step reads as "off by one on average". Pin regression thresholds in steps; the value is
+an ``EightBitSteps``, so `result.maeSteps < 2.55` reads and compares directly.
+
+The 0–100 scores (``ImageComparisonResult/mae`` and the per-channel values) are the same
+measure divided by 2.55:
 
 | Score | Meaning |
 |-------|---------|

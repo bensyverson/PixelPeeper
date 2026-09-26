@@ -3,7 +3,7 @@
 /// Pixel data is stored in row-major order with 4 bytes per pixel (red, green, blue, alpha),
 /// using the sRGB color space with premultiplied alpha.
 ///
-/// Create a `PixelImage` by loading from a file with ``load(from:)`` or by
+/// Create a `PixelImage` by loading from a file with ``load(from:scale:)`` or by
 /// providing pixel data directly.
 public struct PixelImage: Friendly {
     /// The width of the image in pixels.

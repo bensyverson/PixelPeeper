@@ -6,9 +6,10 @@ import Testing
 struct ImageComparisonResultTests {
     @Test("stores overall and per-channel MAE values")
     func storesValues() {
-        let result = ImageComparisonResult(mae: 50.0, red: 100.0, green: 0.0, blue: 100.0, alpha: 0.0)
+        let result = ImageComparisonResult(mae: 50.0, maeSteps: 127.5, red: 100.0, green: 0.0, blue: 100.0, alpha: 0.0)
 
         #expect(result.mae == 50.0)
+        #expect(result.maeSteps == 127.5)
         #expect(result.red == 100.0)
         #expect(result.green == 0.0)
         #expect(result.blue == 100.0)
@@ -17,9 +18,9 @@ struct ImageComparisonResultTests {
 
     @Test("conforms to Equatable")
     func equatable() {
-        let a = ImageComparisonResult(mae: 1.0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        let b = ImageComparisonResult(mae: 1.0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        let c = ImageComparisonResult(mae: 2.0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let a = ImageComparisonResult(mae: 1.0, maeSteps: 0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let b = ImageComparisonResult(mae: 1.0, maeSteps: 0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let c = ImageComparisonResult(mae: 2.0, maeSteps: 0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
         #expect(a == b)
         #expect(a != c)
@@ -27,15 +28,15 @@ struct ImageComparisonResultTests {
 
     @Test("conforms to Hashable")
     func hashable() {
-        let a = ImageComparisonResult(mae: 1.0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        let b = ImageComparisonResult(mae: 1.0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let a = ImageComparisonResult(mae: 1.0, maeSteps: 0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let b = ImageComparisonResult(mae: 1.0, maeSteps: 0, red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
         #expect(a.hashValue == b.hashValue)
     }
 
     @Test("round-trips through JSON encoding and decoding")
     func codableRoundTrip() throws {
-        let original = ImageComparisonResult(mae: 42.5, red: 10.0, green: 20.0, blue: 30.0, alpha: 0.5)
+        let original = ImageComparisonResult(mae: 42.5, maeSteps: 108.375, red: 10.0, green: 20.0, blue: 30.0, alpha: 0.5)
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .sortedKeys
@@ -47,7 +48,7 @@ struct ImageComparisonResultTests {
 
     @Test("JSON encoding uses expected keys")
     func jsonKeys() throws {
-        let result = ImageComparisonResult(mae: 1.0, red: 2.0, green: 3.0, blue: 4.0, alpha: 5.0)
+        let result = ImageComparisonResult(mae: 1.0, maeSteps: 0, red: 2.0, green: 3.0, blue: 4.0, alpha: 5.0)
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .sortedKeys
@@ -55,6 +56,7 @@ struct ImageComparisonResultTests {
         let json = try #require(String(data: data, encoding: .utf8))
 
         #expect(json.contains("\"mae\""))
+        #expect(json.contains("\"maeSteps\":0"))
         #expect(json.contains("\"red\""))
         #expect(json.contains("\"green\""))
         #expect(json.contains("\"blue\""))
