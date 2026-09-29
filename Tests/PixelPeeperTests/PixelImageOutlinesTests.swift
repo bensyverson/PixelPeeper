@@ -27,7 +27,7 @@ struct PixelImageOutlinesTests {
     }
 
     @Test
-    func `an outline defaults to a 2 px ring with no colour and no label`() {
+    func `an outline defaults to a 2 px ring with no color and no label`() {
         let outline = Outline(rect: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         #expect(outline.color == nil)
@@ -99,7 +99,7 @@ struct PixelImageOutlinesTests {
         #expect(try result.color(atX: 12, y: 5) == Self.white)
     }
 
-    // MARK: - Default two-tone colour
+    // MARK: - Default two-tone color
 
     @Test
     func `the default ring is two-tone so it reads on light and dark alike`() throws {
@@ -119,7 +119,7 @@ struct PixelImageOutlinesTests {
     // MARK: - Labels
 
     @Test
-    func `a labelled outline draws a tag above the rect`() throws {
+    func `a labeled outline draws a tag above the rect`() throws {
         let outline = Outline(
             rect: CGRect(x: 5, y: 40, width: 10, height: 10), color: Self.red, label: "Header",
         )

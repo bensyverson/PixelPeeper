@@ -19,8 +19,8 @@ struct PixelImageResampledDecodeTests {
         #expect(sized == (try PixelImage(cgImage: source)))
     }
 
-    @Test("a solid colour keeps its colour at a smaller size")
-    func solidColourSurvivesDownscale() throws {
+    @Test("a solid color keeps its color at a smaller size")
+    func solidColorSurvivesDownscale() throws {
         let source = try cgImage(
             width: 4, height: 2,
             pixels: Array([[UInt8]](repeating: [0, 128, 255, 255], count: 8).joined()),

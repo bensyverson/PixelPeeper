@@ -3,7 +3,7 @@ import CoreGraphics
 import Foundation
 import PixelPeeper
 
-/// Draws labelled boxes around regions of an image and saves it as a PNG.
+/// Draws labeled boxes around regions of an image and saves it as a PNG.
 ///
 /// A thin adapter over ``PixelImage/withOutlines(_:pixelsPerPoint:origin:)``:
 /// it parses rects, builds ``Outline`` values, and writes the result.
@@ -35,8 +35,8 @@ struct OutlineCommand: AsyncParsableCommand {
     @Option(name: .long, help: "Image pixels per source unit (default: 1).")
     var scale: Double = 1
 
-    /// The box colour as a hex string, or the default two-tone ring.
-    @Option(name: .long, help: "Box colour as hex (#RRGGBB or #RRGGBBAA). Omit for a two-tone ring.")
+    /// The box color as a hex string, or the default two-tone ring.
+    @Option(name: .long, help: "Box color as hex (#RRGGBB or #RRGGBBAA). Omit for a two-tone ring.")
     var color: String?
 
     /// A name for each rect, in the same order. Repeatable.
@@ -59,7 +59,7 @@ struct OutlineCommand: AsyncParsableCommand {
     @Option(name: .long, help: "Scale factor for rasterizing vector inputs like PDF (default: 2).")
     var rasterScale: Int = 2
 
-    /// Rejects a malformed rect, origin or colour before any file is opened,
+    /// Rejects a malformed rect, origin or color before any file is opened,
     /// so the complaint arrives with this subcommand's usage rather than the
     /// root command's.
     func validate() throws {
@@ -80,7 +80,7 @@ struct OutlineCommand: AsyncParsableCommand {
     /// The outlines the flags describe, labels matched to rects in order.
     ///
     /// - Returns: one ``Outline`` per `--rect`.
-    /// - Throws: `ValidationError` if a rect or the colour is malformed.
+    /// - Throws: `ValidationError` if a rect or the color is malformed.
     func outlines() throws -> [Outline] {
         let paint: PixelColor? = try color.map { try PixelColor(hex: $0) }
         return try rect.enumerated().map { index, value in

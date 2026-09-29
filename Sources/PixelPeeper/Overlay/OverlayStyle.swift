@@ -1,4 +1,4 @@
-/// The one place the overlay's colours and metrics are decided.
+/// The one place the overlay's colors and metrics are decided.
 ///
 /// Every number an overlay draws with lives here so a ruler, an outline and a
 /// label cannot drift apart in ink or spacing, and so a change to the look is
@@ -39,16 +39,16 @@ enum OverlayStyle {
     /// The text baseline's offset from the tag's top edge, in pixels.
     static let tagBaseline: Int = 10
 
-    // MARK: - Colours
+    // MARK: - Colors
 
     /// The gutter's fill: near-white, so dark numbers read on it whatever the
     /// image's own theme is.
     static let gutter = PixelColor(red: 247, green: 247, blue: 247, alpha: 255)
 
-    /// The colour ruler labels are set in.
+    /// The color ruler labels are set in.
     static let ink = PixelColor(red: 31, green: 31, blue: 36, alpha: 255)
 
-    /// The tick mark colour.
+    /// The tick mark color.
     static let tick = PixelColor(red: 115, green: 115, blue: 122, alpha: 255)
 
     /// The in-image grid line: a mid-gray at low alpha, legible over a white
@@ -62,7 +62,7 @@ enum OverlayStyle {
     /// a dark background, where the inner half disappears.
     static let outlineLight = PixelColor(red: 255, green: 255, blue: 255, alpha: 255)
 
-    /// The fill behind a label tag when the caller names no colour.
+    /// The fill behind a label tag when the caller names no color.
     static let tagFill = PixelColor(red: 17, green: 17, blue: 20, alpha: 255)
 
     /// Black or white, whichever reads on the given tag fill.
@@ -70,7 +70,7 @@ enum OverlayStyle {
     /// Uses the Rec. 601 luma of the fill, which is close enough for a
     /// two-way choice and needs no gamma work.
     ///
-    /// - Parameter fill: the colour the text will sit on.
+    /// - Parameter fill: the color the text will sit on.
     /// - Returns: near-white for a dark fill, near-black for a light one.
     static func textColor(on fill: PixelColor) -> PixelColor {
         let luma = 0.299 * Double(fill.red) + 0.587 * Double(fill.green) + 0.114 * Double(fill.blue)

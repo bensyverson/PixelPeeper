@@ -46,7 +46,7 @@ struct OutlineCommandTests {
     }
 
     @Test
-    func `scale, colour, label and width default sensibly`() throws {
+    func `scale, color, label and width default sensibly`() throws {
         let command = try PeepCommand.parseAsRoot([
             "outline", "shot.png", "--rect", "0,0,1,1", "--out", "o.png",
         ])
@@ -60,7 +60,7 @@ struct OutlineCommandTests {
     }
 
     @Test
-    func `parses scale, colour, label and width`() throws {
+    func `parses scale, color, label and width`() throws {
         let command = try PeepCommand.parseAsRoot([
             "outline", "shot.png",
             "--rect", "0,0,1,1",
@@ -122,7 +122,7 @@ struct OutlineCommandTests {
     // MARK: - Building outlines
 
     @Test
-    func `labels are matched to rects in order, and missing ones stay unlabelled`() throws {
+    func `labels are matched to rects in order, and missing ones stay unlabeled`() throws {
         let command = try PeepCommand.parseAsRoot([
             "outline", "shot.png",
             "--rect", "0,0,10,10",
@@ -141,7 +141,7 @@ struct OutlineCommandTests {
     }
 
     @Test
-    func `a hex colour applies to every rect`() throws {
+    func `a hex color applies to every rect`() throws {
         let command = try PeepCommand.parseAsRoot([
             "outline", "shot.png",
             "--rect", "0,0,10,10",

@@ -14,7 +14,7 @@ struct PixelImageLabelsTests {
     }
 
     @Test
-    func `a label defaults to the standard tag colour`() {
+    func `a label defaults to the standard tag color`() {
         let label = OverlayLabel(text: "42", position: CGPoint(x: 1, y: 2))
 
         #expect(label.text == "42")

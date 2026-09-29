@@ -1,7 +1,7 @@
 import CoreGraphics
 import Foundation
 
-/// Where every part of a labelled grid goes: the gutter widths and the two
+/// Where every part of a labeled grid goes: the gutter widths and the two
 /// rulers' ticks.
 ///
 /// Separated from the drawing so the geometry can be asserted — and a caller

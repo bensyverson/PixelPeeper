@@ -15,10 +15,10 @@ public extension PixelImage {
     /// the thing it points at — the same image can be read for "did the border
     /// render?" and "where is it?" at once.
     ///
-    /// **The default colour is two-tone.** With no ``Outline/color`` the ring
+    /// **The default color is two-tone.** With no ``Outline/color`` the ring
     /// is drawn half in near-black next to the rect and half in white outside
     /// it, so it is visible on a white page and a dark one alike, with no
-    /// caller having to know which they have. A named colour is drawn solid at
+    /// caller having to know which they have. A named color is drawn solid at
     /// the full width.
     ///
     /// A ``Outline/label`` is drawn in a filled tag just above the rect's

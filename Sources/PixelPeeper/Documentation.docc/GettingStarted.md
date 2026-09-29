@@ -95,7 +95,7 @@ Draw the grid **last**, after any resizing: the gutter is chrome, and fitting it
 with the image makes the numbers unreadable. In ``GridOptions/Mode/rulers`` the image's
 own pixels come through byte for byte, so a gridded capture can still be diffed.
 
-``PixelImage/withGridOverlay(spacing:color:)`` is a different, older thing: an unlabelled
+``PixelImage/withGridOverlay(spacing:color:)`` is a different, older thing: an unlabeled
 grid measured in image pixels. Reach for ``PixelImage/withGrid(_:pixelsPerPoint:origin:)``
 when you want numbers.
 
@@ -161,7 +161,7 @@ Box a region of an image, in the coordinates that produced it:
 # A box around 10,20 100×50 in source units, on an image rendered at 2 px per unit
 peep outline shot.png --rect 10,20,100,50 --scale 2 --out boxed.png
 
-# Several boxes, named, in a colour of your choosing
+# Several boxes, named, in a color of your choosing
 peep outline shot.png \
   --rect 0,0,320,64 --label Header \
   --rect 0,64,320,400 --label Body \

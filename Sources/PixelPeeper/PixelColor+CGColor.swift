@@ -1,7 +1,7 @@
 import CoreGraphics
 
 public extension PixelColor {
-    /// The colour as a Core Graphics colour in the sRGB space.
+    /// The color as a Core Graphics color in the sRGB space.
     ///
     /// Components are divided by 255, so `PixelColor(red: 255, …)` becomes
     /// `1.0`. Alpha is carried through unchanged; a ``PixelImage``'s stored

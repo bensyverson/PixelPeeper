@@ -12,7 +12,7 @@ both overall and per channel (red, green, blue, alpha).
 Supports bitmap formats (PNG, JPEG, TIFF, etc.) and PDF. PDFs are rasterized at a
 configurable scale factor (default 2x).
 
-It also draws *overlays*: labelled rulers, boxes and tags burned onto an image in the
+It also draws *overlays*: labeled rulers, boxes and tags burned onto an image in the
 caller's own coordinates, so an agent or a reviewer reading a screenshot can name a
 position instead of estimating one.
 

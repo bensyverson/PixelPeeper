@@ -1,4 +1,4 @@
-/// The labelled grid a caller asked for.
+/// The labeled grid a caller asked for.
 ///
 /// See ``PixelImage/withGrid(_:pixelsPerPoint:origin:)`` for what gets drawn.
 public struct GridOptions: Friendly {

@@ -83,7 +83,7 @@ struct OverlayCanvas {
     /// Copies an image's pixels in at an integer top-left offset.
     ///
     /// A byte copy rather than a `CGContext.draw`, so the annotated pixels are
-    /// exactly the pixels handed in — no resampling, no colour conversion, no
+    /// exactly the pixels handed in — no resampling, no color conversion, no
     /// compositing against whatever the canvas already held. Rows and columns
     /// that fall outside the canvas are dropped.
     ///

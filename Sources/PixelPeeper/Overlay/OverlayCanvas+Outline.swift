@@ -4,7 +4,7 @@ import Foundation
 /// Rasterizing one outline: the ring bands and the label's tag.
 ///
 /// The ring is drawn as four filled bands rather than a stroked path. A stroke
-/// is centred on its path, so keeping it outside the rect means offsetting the
+/// is centered on its path, so keeping it outside the rect means offsetting the
 /// path by half the line width and reasoning about joins; four rectangles are
 /// exact at any width, need no antialiasing, and make "outside the rect" a
 /// property of the arithmetic rather than of Core Graphics' stroking rules.

@@ -2,7 +2,7 @@ import CoreGraphics
 import Foundation
 
 public extension PixelImage {
-    /// Returns the image surrounded by labelled rulers, numbered in the
+    /// Returns the image surrounded by labeled rulers, numbered in the
     /// caller's own coordinates.
     ///
     /// A vision model reads landmarks; it does not count pixels. Without
@@ -34,8 +34,8 @@ public extension PixelImage {
     /// the gutter, and label text is clipped to the gutter so no antialiased
     /// edge bleeds into the image.
     ///
-    /// This is the labelled grid. ``withGridOverlay(spacing:color:)`` is a
-    /// different, unlabelled thing that draws in pixel space.
+    /// This is the labeled grid. ``withGridOverlay(spacing:color:)`` is a
+    /// different, unlabeled thing that draws in pixel space.
     ///
     /// - Parameters:
     ///   - options: the mode and step. Defaults to lines at every 100 units.

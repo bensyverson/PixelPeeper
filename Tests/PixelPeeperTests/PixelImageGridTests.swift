@@ -2,7 +2,7 @@ import CoreGraphics
 @testable import PixelPeeper
 import Testing
 
-@Suite("PixelImage labelled grid")
+@Suite("PixelImage labeled grid")
 struct PixelImageGridTests {
     /// A deterministic, non-uniform source image so a blit can be checked byte for byte.
     static func source(width: Int, height: Int) -> PixelImage {

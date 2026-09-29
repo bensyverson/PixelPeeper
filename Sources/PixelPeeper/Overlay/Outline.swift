@@ -13,7 +13,7 @@ public struct Outline: Friendly {
     /// the caller's coordinates are.
     public let rect: CGRect
 
-    /// The ring's colour, or `nil` for the default two-tone ring, which reads
+    /// The ring's color, or `nil` for the default two-tone ring, which reads
     /// on a light background and a dark one alike.
     public let color: PixelColor?
 
@@ -28,7 +28,7 @@ public struct Outline: Friendly {
     ///
     /// - Parameters:
     ///   - rect: the region to box, in source units.
-    ///   - color: the ring's colour, or `nil` for the default two-tone ring.
+    ///   - color: the ring's color, or `nil` for the default two-tone ring.
     ///   - label: an optional name for the tag.
     ///   - width: the ring's thickness in image pixels. Defaults to 2.
     public init(rect: CGRect, color: PixelColor? = nil, label: String? = nil, width: Double = 2) {

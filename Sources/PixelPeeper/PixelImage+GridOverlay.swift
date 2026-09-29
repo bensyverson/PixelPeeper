@@ -7,7 +7,7 @@ public extension PixelImage {
     /// - Parameters:
     ///   - spacing: The distance in pixels between grid lines.
     ///   - color: The color to use for grid lines.
-    /// This grid is unlabelled and measured in image pixels. For rulers whose
+    /// This grid is unlabeled and measured in image pixels. For rulers whose
     /// numbers read in the caller's own coordinates — layout points, CSS px —
     /// use ``withGrid(_:pixelsPerPoint:origin:)`` instead.
     ///

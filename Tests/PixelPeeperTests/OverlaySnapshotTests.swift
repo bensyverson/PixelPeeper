@@ -59,7 +59,7 @@ struct OverlaySnapshotTests {
     }
 
     @Test
-    func `the labelled grid matches its golden`() throws {
+    func `the labeled grid matches its golden`() throws {
         let gridded = try Self.source().withGrid(
             GridOptions(mode: .rulersAndLines, step: 25), pixelsPerPoint: 2,
         )
@@ -67,7 +67,7 @@ struct OverlaySnapshotTests {
     }
 
     @Test
-    func `the labelled outlines match their golden`() throws {
+    func `the labeled outlines match their golden`() throws {
         let outlined = try Self.source().withOutlines([
             Outline(rect: CGRect(x: 10, y: 10, width: 20, height: 15), label: "Header"),
             Outline(

@@ -1,7 +1,7 @@
 import CoreGraphics
 import Foundation
 
-/// Rasterizing the labelled grid: the in-image lines, the ruler marks and
+/// Rasterizing the labeled grid: the in-image lines, the ruler marks and
 /// the numbers.
 ///
 /// Split from ``PixelImage/withGrid(_:pixelsPerPoint:origin:)`` so the entry
