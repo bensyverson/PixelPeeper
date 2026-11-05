@@ -10,8 +10,8 @@ struct PixelImageLinearSampleTests {
         0, 0, 255, 255,
     ])
 
-    @Test("samples endpoints and midpoint on a horizontal line")
-    func samplesHorizontalLine() throws {
+    @Test
+    func `samples endpoints and midpoint on a horizontal line`() throws {
         let samples = try Self.horizontalImage.linearSample(
             from: (x: 0, y: 0), to: (x: 2, y: 0), steps: 3,
         )
@@ -26,8 +26,8 @@ struct PixelImageLinearSampleTests {
         #expect(samples[2].color == PixelColor(red: 0, green: 0, blue: 255, alpha: 255))
     }
 
-    @Test("samples two endpoints only with steps=2")
-    func samplesTwoEndpoints() throws {
+    @Test
+    func `samples two endpoints only with steps=2`() throws {
         let samples = try Self.horizontalImage.linearSample(
             from: (x: 0, y: 0), to: (x: 2, y: 0), steps: 2,
         )
@@ -37,8 +37,8 @@ struct PixelImageLinearSampleTests {
         #expect(samples[1].x == 2)
     }
 
-    @Test("samples vertical line")
-    func samplesVerticalLine() throws {
+    @Test
+    func `samples vertical line`() throws {
         // 1x3 image: red, green, blue
         let image = PixelImage(width: 1, height: 3, pixels: [
             255, 0, 0, 255,
@@ -56,8 +56,8 @@ struct PixelImageLinearSampleTests {
         #expect(samples[2].y == 2)
     }
 
-    @Test("throws invalidStepCount for steps less than 2")
-    func throwsForTooFewSteps() {
+    @Test
+    func `throws invalidStepCount for steps less than 2`() {
         #expect(throws: PixelPeeperError.invalidStepCount(1)) {
             try Self.horizontalImage.linearSample(
                 from: (x: 0, y: 0), to: (x: 2, y: 0), steps: 1,
@@ -65,8 +65,8 @@ struct PixelImageLinearSampleTests {
         }
     }
 
-    @Test("throws coordinateOutOfBounds for out-of-bounds start")
-    func throwsForOutOfBoundsStart() {
+    @Test
+    func `throws coordinateOutOfBounds for out-of-bounds start`() {
         #expect(throws: PixelPeeperError.self) {
             try Self.horizontalImage.linearSample(
                 from: (x: -1, y: 0), to: (x: 2, y: 0), steps: 2,
@@ -74,8 +74,8 @@ struct PixelImageLinearSampleTests {
         }
     }
 
-    @Test("throws coordinateOutOfBounds for out-of-bounds end")
-    func throwsForOutOfBoundsEnd() {
+    @Test
+    func `throws coordinateOutOfBounds for out-of-bounds end`() {
         #expect(throws: PixelPeeperError.self) {
             try Self.horizontalImage.linearSample(
                 from: (x: 0, y: 0), to: (x: 5, y: 0), steps: 2,

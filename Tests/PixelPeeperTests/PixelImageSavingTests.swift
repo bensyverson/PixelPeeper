@@ -4,8 +4,8 @@ import Testing
 
 @Suite("PixelImage saving")
 struct PixelImageSavingTests {
-    @Test("write and reload PNG produces identical pixel data")
-    func writeReloadRoundTrip() throws {
+    @Test
+    func `write and reload PNG produces identical pixel data`() throws {
         let original = PixelImage(width: 2, height: 2, pixels: [
             255, 0, 0, 255, 0, 255, 0, 255,
             0, 0, 255, 255, 255, 255, 255, 255,
@@ -24,8 +24,8 @@ struct PixelImageSavingTests {
         #expect(reloaded.pixels == original.pixels)
     }
 
-    @Test("written PNG file exists on disk")
-    func fileExistsAfterWrite() throws {
+    @Test
+    func `written PNG file exists on disk`() throws {
         let image = PixelImage(width: 1, height: 1, pixels: [128, 64, 32, 255])
 
         let url = URL(fileURLWithPath: NSTemporaryDirectory())

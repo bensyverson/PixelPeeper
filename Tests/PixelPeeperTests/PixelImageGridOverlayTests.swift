@@ -18,8 +18,8 @@ struct PixelImageGridOverlayTests {
         },
     )
 
-    @Test("grid lines appear at multiples of spacing")
-    func gridLinesAtSpacingMultiples() throws {
+    @Test
+    func `grid lines appear at multiples of spacing`() throws {
         let result = Self.testImage.withGridOverlay(spacing: 2, color: Self.green)
 
         // (0,0) is on grid (0 % 2 == 0)
@@ -34,16 +34,16 @@ struct PixelImageGridOverlayTests {
         #expect(try result.color(atX: 3, y: 3) == Self.red)
     }
 
-    @Test("preserves image dimensions")
-    func preservesDimensions() {
+    @Test
+    func `preserves image dimensions`() {
         let result = Self.testImage.withGridOverlay(spacing: 2, color: Self.green)
 
         #expect(result.width == Self.testImage.width)
         #expect(result.height == Self.testImage.height)
     }
 
-    @Test("spacing of 1 replaces all pixels with grid color")
-    func spacingOneReplacesAll() throws {
+    @Test
+    func `spacing of 1 replaces all pixels with grid color`() throws {
         let result = Self.testImage.withGridOverlay(spacing: 1, color: Self.green)
 
         for y in 0 ..< result.height {
@@ -53,8 +53,8 @@ struct PixelImageGridOverlayTests {
         }
     }
 
-    @Test("non-grid pixels retain original color")
-    func nonGridPixelsRetainColor() throws {
+    @Test
+    func `non-grid pixels retain original color`() throws {
         let result = Self.testImage.withGridOverlay(spacing: 4, color: Self.green)
 
         // Only x=0 or y=0 are grid lines with spacing 4 in a 4x4 image

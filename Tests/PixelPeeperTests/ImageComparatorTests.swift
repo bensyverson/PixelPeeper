@@ -6,8 +6,8 @@ import Testing
 struct ImageComparatorTests {
     // MARK: - Identity
 
-    @Test("comparing an image to itself yields MAE of 0 for all channels")
-    func identityComparison() throws {
+    @Test
+    func `comparing an image to itself yields MAE of 0 for all channels`() throws {
         let image = solidImage(red: 128, green: 64, blue: 32, alpha: 255, width: 2, height: 2)
         let result = try ImageComparator.compare(image, image)
 
@@ -20,8 +20,8 @@ struct ImageComparatorTests {
 
     // MARK: - Known differences
 
-    @Test("red vs blue: R=100, G=0, B=100, A=0, overall=50")
-    func redVsBlue() throws {
+    @Test
+    func `red vs blue: R=100, G=0, B=100, A=0, overall=50`() throws {
         let red = solidImage(red: 255, green: 0, blue: 0, alpha: 255, width: 2, height: 2)
         let blue = solidImage(red: 0, green: 0, blue: 255, alpha: 255, width: 2, height: 2)
         let result = try ImageComparator.compare(red, blue)
@@ -33,8 +33,8 @@ struct ImageComparatorTests {
         #expect(result.mae == 50.0)
     }
 
-    @Test("black vs white: R=100, G=100, B=100, A=0, overall=75")
-    func blackVsWhite() throws {
+    @Test
+    func `black vs white: R=100, G=100, B=100, A=0, overall=75`() throws {
         let black = solidImage(red: 0, green: 0, blue: 0, alpha: 255, width: 2, height: 2)
         let white = solidImage(red: 255, green: 255, blue: 255, alpha: 255, width: 2, height: 2)
         let result = try ImageComparator.compare(black, white)
@@ -46,8 +46,8 @@ struct ImageComparatorTests {
         #expect(result.mae == 75.0)
     }
 
-    @Test("partially different pixels produce correct averaged MAE")
-    func partialDifference() throws {
+    @Test
+    func `partially different pixels produce correct averaged MAE`() throws {
         // 2×1 image: first pixel red, second pixel red
         let allRed = PixelImage(width: 2, height: 1, pixels: [
             255, 0, 0, 255, // pixel 0: red
@@ -73,8 +73,8 @@ struct ImageComparatorTests {
 
     // MARK: - Dimension mismatch
 
-    @Test("throws dimensionMismatch when images have different sizes with default options")
-    func dimensionMismatchThrows() {
+    @Test
+    func `throws dimensionMismatch when images have different sizes with default options`() {
         let small = solidImage(red: 255, green: 0, blue: 0, alpha: 255, width: 2, height: 2)
         let large = solidImage(red: 255, green: 0, blue: 0, alpha: 255, width: 3, height: 3)
 
@@ -88,8 +88,8 @@ struct ImageComparatorTests {
 
     // MARK: - Resize to smallest
 
-    @Test("resizeToSmallest succeeds when dimensions differ")
-    func resizeToSmallestSucceeds() throws {
+    @Test
+    func `resizeToSmallest succeeds when dimensions differ`() throws {
         let small = solidImage(red: 255, green: 0, blue: 0, alpha: 255, width: 2, height: 2)
         let large = solidImage(red: 255, green: 0, blue: 0, alpha: 255, width: 4, height: 4)
         let options = ComparisonOptions(dimensionMismatch: .resizeToSmallest)
@@ -100,8 +100,8 @@ struct ImageComparatorTests {
         #expect(result.mae < 1.0)
     }
 
-    @Test("resizeToSmallest produces near-zero MAE for identical solid colors at different sizes")
-    func resizeToSmallestSolidColor() throws {
+    @Test
+    func `resizeToSmallest produces near-zero MAE for identical solid colors at different sizes`() throws {
         let small = solidImage(red: 0, green: 128, blue: 255, alpha: 255, width: 2, height: 2)
         let large = solidImage(red: 0, green: 128, blue: 255, alpha: 255, width: 6, height: 6)
         let options = ComparisonOptions(dimensionMismatch: .resizeToSmallest)

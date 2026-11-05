@@ -4,8 +4,8 @@ import Testing
 
 @Suite("LineSample")
 struct LineSampleTests {
-    @Test("stores x, y, and color")
-    func storesValues() {
+    @Test
+    func `stores x, y, and color`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let sample = LineSample(x: 10, y: 20, color: color)
 
@@ -14,8 +14,8 @@ struct LineSampleTests {
         #expect(sample.color == color)
     }
 
-    @Test("conforms to Equatable")
-    func equatable() {
+    @Test
+    func `conforms to Equatable`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let a = LineSample(x: 10, y: 20, color: color)
         let b = LineSample(x: 10, y: 20, color: color)
@@ -25,8 +25,8 @@ struct LineSampleTests {
         #expect(a != c)
     }
 
-    @Test("conforms to Codable")
-    func codable() throws {
+    @Test
+    func `conforms to Codable`() throws {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let sample = LineSample(x: 10, y: 20, color: color)
 

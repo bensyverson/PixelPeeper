@@ -8,8 +8,8 @@ import Testing
 struct ImageComparatorCropToOverlapTests {
     private let options = ComparisonOptions(dimensionMismatch: .cropToOverlap)
 
-    @Test("a taller image whose extra rows differ matches over the overlap")
-    func extraRowsIgnored() throws {
+    @Test
+    func `a taller image whose extra rows differ matches over the overlap`() throws {
         let short = PixelImage(width: 2, height: 1, pixels: [
             255, 0, 0, 255, 0, 255, 0, 255,
         ])
@@ -24,8 +24,8 @@ struct ImageComparatorCropToOverlapTests {
         #expect(result.mae == 0)
     }
 
-    @Test("a wider image whose extra columns differ matches over the overlap")
-    func extraColumnsIgnored() throws {
+    @Test
+    func `a wider image whose extra columns differ matches over the overlap`() throws {
         let narrow = PixelImage(width: 1, height: 2, pixels: [
             255, 0, 0, 255,
             0, 255, 0, 255,
@@ -38,8 +38,8 @@ struct ImageComparatorCropToOverlapTests {
         #expect(try ImageComparator.compare(wide, narrow, options: options).maeSteps == 0)
     }
 
-    @Test("each image is cropped on the axis where it is the larger")
-    func crossedSizes() throws {
+    @Test
+    func `each image is cropped on the axis where it is the larger`() throws {
         // 2×1 against 1×2: the overlap is the single top-left pixel.
         let wide = PixelImage(width: 2, height: 1, pixels: [
             0, 0, 0, 255, 255, 255, 255, 255,
@@ -52,8 +52,8 @@ struct ImageComparatorCropToOverlapTests {
         #expect(try ImageComparator.compare(wide, tall, options: options).maeSteps == 1)
     }
 
-    @Test("equal sizes compare every pixel, as with the default")
-    func equalSizes() throws {
+    @Test
+    func `equal sizes compare every pixel, as with the default`() throws {
         let a = PixelImage(width: 1, height: 1, pixels: [0, 0, 0, 255])
         let b = PixelImage(width: 1, height: 1, pixels: [0, 0, 4, 255])
 
@@ -64,8 +64,8 @@ struct ImageComparatorCropToOverlapTests {
         #expect(cropped == strict)
     }
 
-    @Test("round-trips through JSON")
-    func optionCodable() throws {
+    @Test
+    func `round-trips through JSON`() throws {
         let data = try JSONEncoder().encode(options)
         let decoded: ComparisonOptions = try JSONDecoder().decode(ComparisonOptions.self, from: data)
 

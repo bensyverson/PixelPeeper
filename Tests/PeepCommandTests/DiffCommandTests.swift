@@ -6,8 +6,8 @@ import Testing
 struct DiffCommandTests {
     // MARK: - Argument parsing
 
-    @Test("parses two positional image paths and required options")
-    func parsesArguments() throws {
+    @Test
+    func `parses two positional image paths and required options`() throws {
         let command = try PeepCommand.parseAsRoot([
             "diff", "a.png", "b.png",
             "--output", "out.png",
@@ -19,8 +19,8 @@ struct DiffCommandTests {
         #expect(diff.output == "out.png")
     }
 
-    @Test("parses --intensity option")
-    func parsesIntensity() throws {
+    @Test
+    func `parses --intensity option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "diff", "a.png", "b.png",
             "--output", "out.png",
@@ -31,8 +31,8 @@ struct DiffCommandTests {
         #expect(diff.intensity == 2.5)
     }
 
-    @Test("parses --resize flag")
-    func parsesResize() throws {
+    @Test
+    func `parses --resize flag`() throws {
         let command = try PeepCommand.parseAsRoot([
             "diff", "a.png", "b.png",
             "--output", "out.png",
@@ -43,8 +43,8 @@ struct DiffCommandTests {
         #expect(diff.resize == true)
     }
 
-    @Test("parses --scale option")
-    func parsesScale() throws {
+    @Test
+    func `parses --scale option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "diff", "a.png", "b.png",
             "--output", "out.png",
@@ -55,8 +55,8 @@ struct DiffCommandTests {
         #expect(diff.scale == 3)
     }
 
-    @Test("defaults intensity to 1.0, resize to false, scale to 2")
-    func defaults() throws {
+    @Test
+    func `defaults intensity to 1.0, resize to false, scale to 2`() throws {
         let command = try PeepCommand.parseAsRoot([
             "diff", "a.png", "b.png",
             "--output", "out.png",
@@ -70,8 +70,8 @@ struct DiffCommandTests {
 
     // MARK: - Validation
 
-    @Test("rejects zero intensity")
-    func rejectsZeroIntensity() throws {
+    @Test
+    func `rejects zero intensity`() throws {
         // parseAsRoot calls validate() automatically, so we expect the whole parse to throw
         #expect(throws: (any Error).self) {
             try PeepCommand.parseAsRoot([
@@ -82,8 +82,8 @@ struct DiffCommandTests {
         }
     }
 
-    @Test("rejects negative intensity via validate()")
-    func rejectsNegativeIntensity() throws {
+    @Test
+    func `rejects negative intensity via validate()`() throws {
         // Construct directly to test validate() with negative value
         var diff = DiffCommand()
         diff.image1 = "a.png"

@@ -10,7 +10,7 @@ struct CompareCommand: AsyncParsableCommand {
     )
 
     /// Output format for comparison results.
-    enum Format: String, ExpressibleByArgument, CaseIterable, Sendable {
+    enum Format: String, ExpressibleByArgument, CaseIterable {
         case text
         case json
     }

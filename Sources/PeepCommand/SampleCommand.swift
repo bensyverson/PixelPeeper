@@ -10,7 +10,7 @@ struct SampleCommand: AsyncParsableCommand {
     )
 
     /// Output format for the sampled color.
-    enum Format: String, ExpressibleByArgument, CaseIterable, Sendable {
+    enum Format: String, ExpressibleByArgument, CaseIterable {
         case hex
         case text
         case json

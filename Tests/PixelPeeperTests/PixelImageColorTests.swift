@@ -4,8 +4,8 @@ import Testing
 
 @Suite("PixelImage color sampling")
 struct PixelImageColorTests {
-    @Test("returns color of pixel at given coordinates")
-    func colorAtCoordinates() throws {
+    @Test
+    func `returns color of pixel at given coordinates`() throws {
         // 2×2 image: red, green, blue, white
         let pixels: [UInt8] = [
             255, 0, 0, 255, // (0,0) red
@@ -28,8 +28,8 @@ struct PixelImageColorTests {
         #expect(white == PixelColor(red: 255, green: 255, blue: 255, alpha: 255))
     }
 
-    @Test("returns color from a loaded fixture image")
-    func colorFromFixture() throws {
+    @Test
+    func `returns color from a loaded fixture image`() throws {
         let url = try #require(Bundle.module.url(forResource: "red-2x2", withExtension: "png", subdirectory: "Fixtures"))
         let image = try PixelImage.load(from: url)
 
@@ -37,8 +37,8 @@ struct PixelImageColorTests {
         #expect(color == PixelColor(red: 255, green: 0, blue: 0, alpha: 255))
     }
 
-    @Test("throws coordinateOutOfBounds for negative x")
-    func outOfBoundsNegativeX() {
+    @Test
+    func `throws coordinateOutOfBounds for negative x`() {
         let image = PixelImage(width: 2, height: 2, pixels: [UInt8](repeating: 0, count: 16))
 
         #expect(throws: PixelPeeperError.coordinateOutOfBounds(x: -1, y: 0, width: 2, height: 2)) {
@@ -46,8 +46,8 @@ struct PixelImageColorTests {
         }
     }
 
-    @Test("throws coordinateOutOfBounds for x at width boundary")
-    func outOfBoundsXAtWidth() {
+    @Test
+    func `throws coordinateOutOfBounds for x at width boundary`() {
         let image = PixelImage(width: 2, height: 2, pixels: [UInt8](repeating: 0, count: 16))
 
         #expect(throws: PixelPeeperError.coordinateOutOfBounds(x: 2, y: 0, width: 2, height: 2)) {
@@ -55,8 +55,8 @@ struct PixelImageColorTests {
         }
     }
 
-    @Test("throws coordinateOutOfBounds for negative y")
-    func outOfBoundsNegativeY() {
+    @Test
+    func `throws coordinateOutOfBounds for negative y`() {
         let image = PixelImage(width: 2, height: 2, pixels: [UInt8](repeating: 0, count: 16))
 
         #expect(throws: PixelPeeperError.coordinateOutOfBounds(x: 0, y: -1, width: 2, height: 2)) {
@@ -64,8 +64,8 @@ struct PixelImageColorTests {
         }
     }
 
-    @Test("throws coordinateOutOfBounds for y at height boundary")
-    func outOfBoundsYAtHeight() {
+    @Test
+    func `throws coordinateOutOfBounds for y at height boundary`() {
         let image = PixelImage(width: 2, height: 2, pixels: [UInt8](repeating: 0, count: 16))
 
         #expect(throws: PixelPeeperError.coordinateOutOfBounds(x: 0, y: 2, width: 2, height: 2)) {

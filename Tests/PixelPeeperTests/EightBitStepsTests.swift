@@ -4,15 +4,15 @@ import Testing
 
 @Suite("EightBitSteps")
 struct EightBitStepsTests {
-    @Test("holds its value in 8-bit channel steps")
-    func holdsValue() {
+    @Test
+    func `holds its value in 8-bit channel steps`() {
         let steps = EightBitSteps(127.5)
 
         #expect(steps.value == 127.5)
     }
 
-    @Test("reads a float or integer literal as steps")
-    func literals() {
+    @Test
+    func `reads a float or integer literal as steps`() {
         let fromFloat: EightBitSteps = 2.55
         let fromInteger: EightBitSteps = 255
 
@@ -20,8 +20,8 @@ struct EightBitStepsTests {
         #expect(fromInteger.value == 255.0)
     }
 
-    @Test("orders by value, so a threshold reads as a comparison")
-    func comparable() {
+    @Test
+    func `orders by value, so a threshold reads as a comparison`() {
         let small = EightBitSteps(0.5)
         let large = EightBitSteps(1.0)
 
@@ -31,21 +31,21 @@ struct EightBitStepsTests {
         #expect(!(large < 1.0))
     }
 
-    @Test("names its unit when printed")
-    func description() {
+    @Test
+    func `names its unit when printed`() {
         #expect(EightBitSteps(1.25).description == "1.25 steps")
     }
 
-    @Test("encodes as a bare number")
-    func encodesAsNumber() throws {
+    @Test
+    func `encodes as a bare number`() throws {
         let data = try JSONEncoder().encode(EightBitSteps(63.75))
         let json = try #require(String(data: data, encoding: .utf8))
 
         #expect(json == "63.75")
     }
 
-    @Test("round-trips through JSON")
-    func codableRoundTrip() throws {
+    @Test
+    func `round-trips through JSON`() throws {
         let original = EightBitSteps(191.25)
 
         let data = try JSONEncoder().encode(original)

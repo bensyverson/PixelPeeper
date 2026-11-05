@@ -5,8 +5,8 @@ import Testing
 struct GridCommandTests {
     // MARK: - Argument parsing
 
-    @Test("parses image path and required options")
-    func parsesArguments() throws {
+    @Test
+    func `parses image path and required options`() throws {
         let command = try PeepCommand.parseAsRoot([
             "grid", "photo.png",
             "--spacing", "10",
@@ -19,8 +19,8 @@ struct GridCommandTests {
         #expect(grid.output == "out.png")
     }
 
-    @Test("parses --color option")
-    func parsesColor() throws {
+    @Test
+    func `parses --color option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "grid", "a.png",
             "--spacing", "10",
@@ -32,8 +32,8 @@ struct GridCommandTests {
         #expect(grid.color == "#00ff00")
     }
 
-    @Test("parses --scale option")
-    func parsesScale() throws {
+    @Test
+    func `parses --scale option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "grid", "a.png",
             "--spacing", "10",
@@ -45,8 +45,8 @@ struct GridCommandTests {
         #expect(grid.scale == 3)
     }
 
-    @Test("defaults color to #ff0000 and scale to 2")
-    func defaults() throws {
+    @Test
+    func `defaults color to #ff0000 and scale to 2`() throws {
         let command = try PeepCommand.parseAsRoot([
             "grid", "a.png",
             "--spacing", "10",

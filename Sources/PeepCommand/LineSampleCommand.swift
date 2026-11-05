@@ -10,7 +10,7 @@ struct LineSampleCommand: AsyncParsableCommand {
     )
 
     /// Output format for the line sample results.
-    enum Format: String, ExpressibleByArgument, CaseIterable, Sendable {
+    enum Format: String, ExpressibleByArgument, CaseIterable {
         case text
         case json
     }

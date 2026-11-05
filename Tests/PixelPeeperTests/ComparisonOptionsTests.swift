@@ -4,15 +4,15 @@ import Testing
 
 @Suite("ComparisonOptions")
 struct ComparisonOptionsTests {
-    @Test("default options use error strategy for dimension mismatch")
-    func defaultIsError() {
+    @Test
+    func `default options use error strategy for dimension mismatch`() {
         let options = ComparisonOptions.default
 
         #expect(options.dimensionMismatch == .error)
     }
 
-    @Test("conforms to Equatable")
-    func equatable() {
+    @Test
+    func `conforms to Equatable`() {
         let a = ComparisonOptions(dimensionMismatch: .error)
         let b = ComparisonOptions(dimensionMismatch: .error)
         let c = ComparisonOptions(dimensionMismatch: .resizeToSmallest)
@@ -21,8 +21,8 @@ struct ComparisonOptionsTests {
         #expect(a != c)
     }
 
-    @Test("round-trips through JSON encoding and decoding")
-    func codableRoundTrip() throws {
+    @Test
+    func `round-trips through JSON encoding and decoding`() throws {
         let original = ComparisonOptions(dimensionMismatch: .resizeToSmallest)
 
         let data = try JSONEncoder().encode(original)

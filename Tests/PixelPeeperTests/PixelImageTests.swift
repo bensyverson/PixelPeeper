@@ -6,8 +6,8 @@ import Testing
 struct PixelImageTests {
     // MARK: - Struct basics
 
-    @Test("stores width, height, and pixel data")
-    func storesValues() {
+    @Test
+    func `stores width, height, and pixel data`() {
         // 1×1 red pixel: RGBA
         let pixels: [UInt8] = [255, 0, 0, 255]
         let image = PixelImage(width: 1, height: 1, pixels: pixels)
@@ -17,16 +17,16 @@ struct PixelImageTests {
         #expect(image.pixels == pixels)
     }
 
-    @Test("pixelCount returns width times height")
-    func pixelCount() {
+    @Test
+    func `pixelCount returns width times height`() {
         let pixels = [UInt8](repeating: 0, count: 3 * 2 * 4)
         let image = PixelImage(width: 3, height: 2, pixels: pixels)
 
         #expect(image.pixelCount == 6)
     }
 
-    @Test("conforms to Equatable")
-    func equatable() {
+    @Test
+    func `conforms to Equatable`() {
         let a = PixelImage(width: 1, height: 1, pixels: [255, 0, 0, 255])
         let b = PixelImage(width: 1, height: 1, pixels: [255, 0, 0, 255])
         let c = PixelImage(width: 1, height: 1, pixels: [0, 0, 255, 255])
@@ -35,8 +35,8 @@ struct PixelImageTests {
         #expect(a != c)
     }
 
-    @Test("round-trips through JSON encoding and decoding")
-    func codableRoundTrip() throws {
+    @Test
+    func `round-trips through JSON encoding and decoding`() throws {
         let original = PixelImage(width: 1, height: 1, pixels: [128, 64, 32, 255])
 
         let data = try JSONEncoder().encode(original)
@@ -47,8 +47,8 @@ struct PixelImageTests {
 
     // MARK: - Loading from file
 
-    @Test("loads a 2×2 solid red PNG with correct dimensions and pixel values")
-    func loadRedFixture() throws {
+    @Test
+    func `loads a 2×2 solid red PNG with correct dimensions and pixel values`() throws {
         let url = fixtureURL(named: "red-2x2")
         let image = try PixelImage.load(from: url)
 
@@ -66,8 +66,8 @@ struct PixelImageTests {
         }
     }
 
-    @Test("loads a 2×2 solid blue PNG with correct pixel values")
-    func loadBlueFixture() throws {
+    @Test
+    func `loads a 2×2 solid blue PNG with correct pixel values`() throws {
         let url = fixtureURL(named: "blue-2x2")
         let image = try PixelImage.load(from: url)
 
@@ -83,8 +83,8 @@ struct PixelImageTests {
         }
     }
 
-    @Test("throws fileNotFound for a nonexistent path")
-    func loadMissingFile() {
+    @Test
+    func `throws fileNotFound for a nonexistent path`() {
         let url = URL(fileURLWithPath: "/tmp/nonexistent-\(UUID()).png")
 
         #expect(throws: PixelPeeperError.self) {
@@ -92,8 +92,8 @@ struct PixelImageTests {
         }
     }
 
-    @Test("throws imageLoadFailed for an invalid image file")
-    func loadInvalidFile() throws {
+    @Test
+    func `throws imageLoadFailed for an invalid image file`() throws {
         let url = URL(fileURLWithPath: "/tmp/not-an-image-\(UUID()).png")
         try "this is not an image".write(to: url, atomically: true, encoding: .utf8)
         defer { try? FileManager.default.removeItem(at: url) }
@@ -105,8 +105,8 @@ struct PixelImageTests {
 
     // MARK: - PDF loading
 
-    @Test("loads a solid red PDF and extracts pixel data")
-    func loadPDFFixture() throws {
+    @Test
+    func `loads a solid red PDF and extracts pixel data`() throws {
         let url = fixtureURL(named: "red-100x100", extension: "pdf")
         let image = try PixelImage.load(from: url)
 
@@ -124,8 +124,8 @@ struct PixelImageTests {
         }
     }
 
-    @Test("loads a PDF at custom scale")
-    func loadPDFAtCustomScale() throws {
+    @Test
+    func `loads a PDF at custom scale`() throws {
         let url = fixtureURL(named: "red-100x100", extension: "pdf")
         let image = try PixelImage.load(from: url, scale: 1)
 
@@ -134,8 +134,8 @@ struct PixelImageTests {
         #expect(image.height == 100)
     }
 
-    @Test("scale parameter does not affect bitmap loading")
-    func scaleIgnoredForBitmaps() throws {
+    @Test
+    func `scale parameter does not affect bitmap loading`() throws {
         let url = fixtureURL(named: "red-2x2", extension: "png")
         let image = try PixelImage.load(from: url, scale: 4)
 

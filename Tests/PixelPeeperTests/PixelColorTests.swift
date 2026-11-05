@@ -4,8 +4,8 @@ import Testing
 
 @Suite("PixelColor")
 struct PixelColorTests {
-    @Test("stores RGBA values")
-    func storesValues() {
+    @Test
+    func `stores RGBA values`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
 
         #expect(color.red == 128)
@@ -14,8 +14,8 @@ struct PixelColorTests {
         #expect(color.alpha == 255)
     }
 
-    @Test("conforms to Equatable")
-    func equatable() {
+    @Test
+    func `conforms to Equatable`() {
         let a = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let b = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let c = PixelColor(red: 0, green: 0, blue: 0, alpha: 0)
@@ -24,16 +24,16 @@ struct PixelColorTests {
         #expect(a != c)
     }
 
-    @Test("conforms to Hashable")
-    func hashable() {
+    @Test
+    func `conforms to Hashable`() {
         let a = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let b = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
 
         #expect(a.hashValue == b.hashValue)
     }
 
-    @Test("round-trips through JSON encoding and decoding")
-    func codableRoundTrip() throws {
+    @Test
+    func `round-trips through JSON encoding and decoding`() throws {
         let original = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
 
         let data = try JSONEncoder().encode(original)
@@ -42,15 +42,15 @@ struct PixelColorTests {
         #expect(decoded == original)
     }
 
-    @Test("formats as hex string with RRGGBBAA")
-    func hexString() {
+    @Test
+    func `formats as hex string with RRGGBBAA`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
 
         #expect(color.hex == "#804020ff")
     }
 
-    @Test("formats hex with leading zeros")
-    func hexLeadingZeros() {
+    @Test
+    func `formats hex with leading zeros`() {
         let color = PixelColor(red: 0, green: 1, blue: 15, alpha: 0)
 
         #expect(color.hex == "#00010f00")

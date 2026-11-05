@@ -6,24 +6,24 @@ import Testing
 /// difference, alpha included, on the 0–255 scale the bytes themselves use.
 @Suite("ImageComparator in 8-bit steps")
 struct ImageComparatorEightBitTests {
-    @Test("red against blue is 127.5 steps: two of four channels differ by 255")
-    func redVsBlue() throws {
+    @Test
+    func `red against blue is 127.5 steps: two of four channels differ by 255`() throws {
         let red = solid(255, 0, 0, 255, width: 2, height: 2)
         let blue = solid(0, 0, 255, 255, width: 2, height: 2)
 
         #expect(try ImageComparator.compare(red, blue).maeSteps == 127.5)
     }
 
-    @Test("black against white is 191.25 steps: three of four channels differ by 255")
-    func blackVsWhite() throws {
+    @Test
+    func `black against white is 191.25 steps: three of four channels differ by 255`() throws {
         let black = solid(0, 0, 0, 255, width: 2, height: 2)
         let white = solid(255, 255, 255, 255, width: 2, height: 2)
 
         #expect(try ImageComparator.compare(black, white).maeSteps == 191.25)
     }
 
-    @Test("alpha counts as a channel")
-    func alphaCounts() throws {
+    @Test
+    func `alpha counts as a channel`() throws {
         let opaque = solid(0, 0, 0, 255, width: 1, height: 1)
         let clear = solid(0, 0, 0, 0, width: 1, height: 1)
 
@@ -33,8 +33,8 @@ struct ImageComparatorEightBitTests {
     /// The figure is the summed byte difference over the channel count, done once in
     /// `Double`. Callers pin thresholds to the last digit, so it must be bit-identical
     /// to that quotient, not merely close — and the 0–100 figure times 2.55 is not.
-    @Test("is exactly the summed difference over the channel count")
-    func exactQuotient() throws {
+    @Test
+    func `is exactly the summed difference over the channel count`() throws {
         let base = PixelImage(width: 3, height: 1, pixels: [
             10, 20, 30, 255,
             40, 50, 60, 255,

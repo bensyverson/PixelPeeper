@@ -1,6 +1,6 @@
 import CoreGraphics
 
-extension PixelImage {
+public extension PixelImage {
     /// Creates a pixel image by extracting RGBA pixel data from a `CGImage`.
     ///
     /// The image is drawn into an sRGB context with 8 bits per component, premultiplied alpha,
@@ -8,7 +8,7 @@ extension PixelImage {
     ///
     /// - Parameter cgImage: The Core Graphics image to extract pixels from.
     /// - Throws: ``PixelPeeperError/cgImageExtractionFailed`` if the bitmap context cannot be created.
-    public init(cgImage: CGImage) throws {
+    init(cgImage: CGImage) throws {
         try self.init(cgImage: cgImage, width: cgImage.width, height: cgImage.height)
     }
 
@@ -29,7 +29,7 @@ extension PixelImage {
     ///   - height: The height of the resulting image, in pixels.
     /// - Throws: ``PixelPeeperError/cgImageExtractionFailed`` if the bitmap context cannot be
     ///   created, including when either dimension is zero.
-    public init(cgImage: CGImage, width: Int, height: Int) throws {
+    init(cgImage: CGImage, width: Int, height: Int) throws {
         guard width > 0, height > 0 else {
             throw PixelPeeperError.cgImageExtractionFailed
         }
@@ -43,7 +43,7 @@ extension PixelImage {
         guard let context = CGContext(
             data: &pixels, width: width, height: height,
             bitsPerComponent: 8, bytesPerRow: bytesPerRow,
-            space: colorSpace, bitmapInfo: bitmapInfo
+            space: colorSpace, bitmapInfo: bitmapInfo,
         ) else {
             throw PixelPeeperError.cgImageExtractionFailed
         }

@@ -7,8 +7,8 @@ import Testing
 /// given size — resampling the source itself, once, as it is decoded.
 @Suite("PixelImage decoded at a size")
 struct PixelImageResampledDecodeTests {
-    @Test("at the image's own size it decodes exactly as init(cgImage:) does")
-    func nativeSizeMatchesPlainDecode() throws {
+    @Test
+    func `at the image's own size it decodes exactly as init(cgImage:) does`() throws {
         let source = try cgImage(width: 3, height: 2, pixels: [
             255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255,
             10, 20, 30, 255, 128, 128, 128, 128, 0, 0, 0, 0,
@@ -16,11 +16,11 @@ struct PixelImageResampledDecodeTests {
 
         let sized = try PixelImage(cgImage: source, width: 3, height: 2)
 
-        #expect(sized == (try PixelImage(cgImage: source)))
+        #expect(try sized == PixelImage(cgImage: source))
     }
 
-    @Test("a solid color keeps its color at a smaller size")
-    func solidColorSurvivesDownscale() throws {
+    @Test
+    func `a solid color keeps its color at a smaller size`() throws {
         let source = try cgImage(
             width: 4, height: 2,
             pixels: Array([[UInt8]](repeating: [0, 128, 255, 255], count: 8).joined()),
@@ -33,8 +33,8 @@ struct PixelImageResampledDecodeTests {
         #expect(sized.pixels == [0, 128, 255, 255, 0, 128, 255, 255])
     }
 
-    @Test("a smaller size resamples the whole image rather than cropping it")
-    func resamplesNotCrops() throws {
+    @Test
+    func `a smaller size resamples the whole image rather than cropping it`() throws {
         let source = try cgImage(width: 2, height: 1, pixels: [
             0, 0, 0, 255, 255, 255, 255, 255,
         ])
@@ -45,11 +45,11 @@ struct PixelImageResampledDecodeTests {
         #expect(sized.pixels[0] > 0 && sized.pixels[0] < 255)
     }
 
-    @Test("the top of the source stays at the top of the buffer")
-    func keepsOrientation() throws {
+    @Test
+    func `the top of the source stays at the top of the buffer`() throws {
         let source = try cgImage(width: 2, height: 4, pixels: Array([
-            [UInt8]](repeating: [255, 0, 0, 255], count: 4).joined()
-        ) + Array([[UInt8]](repeating: [0, 0, 255, 255], count: 4).joined()))
+            [UInt8]
+        ](repeating: [255, 0, 0, 255], count: 4).joined()) + Array([[UInt8]](repeating: [0, 0, 255, 255], count: 4).joined()))
 
         let sized = try PixelImage(cgImage: source, width: 1, height: 2)
 
@@ -59,8 +59,8 @@ struct PixelImageResampledDecodeTests {
         #expect(sized.pixels[4] < 55 && sized.pixels[6] > 200)
     }
 
-    @Test("a zero-pixel size is refused")
-    func zeroSizeThrows() throws {
+    @Test
+    func `a zero-pixel size is refused`() throws {
         let source = try cgImage(width: 1, height: 1, pixels: [0, 0, 0, 255])
 
         #expect(throws: PixelPeeperError.cgImageExtractionFailed) {

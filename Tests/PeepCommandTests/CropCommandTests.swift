@@ -5,8 +5,8 @@ import Testing
 struct CropCommandTests {
     // MARK: - Argument parsing
 
-    @Test("parses image path and required options")
-    func parsesArguments() throws {
+    @Test
+    func `parses image path and required options`() throws {
         let command = try PeepCommand.parseAsRoot([
             "crop", "photo.png",
             "--x", "10", "--y", "20",
@@ -23,8 +23,8 @@ struct CropCommandTests {
         #expect(crop.output == "out.png")
     }
 
-    @Test("parses --inset option")
-    func parsesInset() throws {
+    @Test
+    func `parses --inset option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "crop", "a.png",
             "--x", "0", "--y", "0",
@@ -37,8 +37,8 @@ struct CropCommandTests {
         #expect(crop.inset == 5)
     }
 
-    @Test("parses --scale option")
-    func parsesScale() throws {
+    @Test
+    func `parses --scale option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "crop", "a.png",
             "--x", "0", "--y", "0",
@@ -51,8 +51,8 @@ struct CropCommandTests {
         #expect(crop.scale == 3)
     }
 
-    @Test("defaults inset to 0 and scale to 2")
-    func defaults() throws {
+    @Test
+    func `defaults inset to 0 and scale to 2`() throws {
         let command = try PeepCommand.parseAsRoot([
             "crop", "a.png",
             "--x", "0", "--y", "0",

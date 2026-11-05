@@ -6,8 +6,8 @@ import Testing
 struct LineSampleCommandTests {
     // MARK: - Argument parsing
 
-    @Test("parses image path and required options")
-    func parsesArguments() throws {
+    @Test
+    func `parses image path and required options`() throws {
         let command = try PeepCommand.parseAsRoot([
             "linesample", "photo.png",
             "--x1", "0", "--y1", "0",
@@ -24,8 +24,8 @@ struct LineSampleCommandTests {
         #expect(lineSample.steps == 10)
     }
 
-    @Test("parses --format text option")
-    func parsesFormatText() throws {
+    @Test
+    func `parses --format text option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "linesample", "a.png",
             "--x1", "0", "--y1", "0",
@@ -38,8 +38,8 @@ struct LineSampleCommandTests {
         #expect(lineSample.format == .text)
     }
 
-    @Test("parses --format json option")
-    func parsesFormatJSON() throws {
+    @Test
+    func `parses --format json option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "linesample", "a.png",
             "--x1", "0", "--y1", "0",
@@ -52,8 +52,8 @@ struct LineSampleCommandTests {
         #expect(lineSample.format == .json)
     }
 
-    @Test("parses --scale option")
-    func parsesScale() throws {
+    @Test
+    func `parses --scale option`() throws {
         let command = try PeepCommand.parseAsRoot([
             "linesample", "a.png",
             "--x1", "0", "--y1", "0",
@@ -66,8 +66,8 @@ struct LineSampleCommandTests {
         #expect(lineSample.scale == 3)
     }
 
-    @Test("defaults format to text and scale to 2")
-    func defaults() throws {
+    @Test
+    func `defaults format to text and scale to 2`() throws {
         let command = try PeepCommand.parseAsRoot([
             "linesample", "a.png",
             "--x1", "0", "--y1", "0",
@@ -82,8 +82,8 @@ struct LineSampleCommandTests {
 
     // MARK: - Output formatting
 
-    @Test("formats samples as text with coordinates and hex colors")
-    func textFormatting() {
+    @Test
+    func `formats samples as text with coordinates and hex colors`() {
         let samples = [
             LineSample(x: 0, y: 0, color: PixelColor(red: 255, green: 0, blue: 0, alpha: 255)),
             LineSample(x: 50, y: 25, color: PixelColor(red: 0, green: 255, blue: 0, alpha: 255)),
@@ -95,8 +95,8 @@ struct LineSampleCommandTests {
         #expect(output.contains("50, 25: #00ff00ff"))
     }
 
-    @Test("formats samples as JSON array")
-    func jsonFormatting() throws {
+    @Test
+    func `formats samples as JSON array`() throws {
         let samples = [
             LineSample(x: 10, y: 20, color: PixelColor(red: 128, green: 64, blue: 32, alpha: 255)),
         ]

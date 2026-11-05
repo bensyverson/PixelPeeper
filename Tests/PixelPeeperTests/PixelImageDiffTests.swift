@@ -3,8 +3,8 @@ import Testing
 
 @Suite("PixelImage diff")
 struct PixelImageDiffTests {
-    @Test("identical images produce black diff")
-    func identicalImagesProduceBlackDiff() throws {
+    @Test
+    func `identical images produce black diff`() throws {
         let image = PixelImage(width: 2, height: 1, pixels: [
             255, 0, 0, 255, 0, 255, 0, 255,
         ])
@@ -17,8 +17,8 @@ struct PixelImageDiffTests {
         #expect(result.pixels == [0, 0, 0, 255, 0, 0, 0, 255])
     }
 
-    @Test("maximally different pixels produce white diff at intensity 1")
-    func maxDifferenceProducesWhite() throws {
+    @Test
+    func `maximally different pixels produce white diff at intensity 1`() throws {
         let black = PixelImage(width: 1, height: 1, pixels: [0, 0, 0, 255])
         let white = PixelImage(width: 1, height: 1, pixels: [255, 255, 255, 255])
 
@@ -27,8 +27,8 @@ struct PixelImageDiffTests {
         #expect(result.pixels == [255, 255, 255, 255])
     }
 
-    @Test("intensity multiplies the difference")
-    func intensityMultipliesDifference() throws {
+    @Test
+    func `intensity multiplies the difference`() throws {
         let a = PixelImage(width: 1, height: 1, pixels: [0, 0, 0, 255])
         let b = PixelImage(width: 1, height: 1, pixels: [100, 50, 25, 255])
 
@@ -38,8 +38,8 @@ struct PixelImageDiffTests {
         #expect(result.pixels == [200, 100, 50, 255])
     }
 
-    @Test("intensity clamps values to 255")
-    func intensityClampsTo255() throws {
+    @Test
+    func `intensity clamps values to 255`() throws {
         let a = PixelImage(width: 1, height: 1, pixels: [0, 0, 0, 255])
         let b = PixelImage(width: 1, height: 1, pixels: [200, 200, 200, 255])
 
@@ -49,8 +49,8 @@ struct PixelImageDiffTests {
         #expect(result.pixels == [255, 255, 255, 255])
     }
 
-    @Test("diff ignores alpha channel differences")
-    func ignoresAlphaChannelDifferences() throws {
+    @Test
+    func `diff ignores alpha channel differences`() throws {
         let a = PixelImage(width: 1, height: 1, pixels: [100, 100, 100, 0])
         let b = PixelImage(width: 1, height: 1, pixels: [100, 100, 100, 255])
 
@@ -60,8 +60,8 @@ struct PixelImageDiffTests {
         #expect(result.pixels == [0, 0, 0, 255])
     }
 
-    @Test("throws dimensionMismatch for different-sized images")
-    func throwsForDimensionMismatch() {
+    @Test
+    func `throws dimensionMismatch for different-sized images`() {
         let a = PixelImage(width: 2, height: 2, pixels: [UInt8](repeating: 0, count: 16))
         let b = PixelImage(width: 3, height: 3, pixels: [UInt8](repeating: 0, count: 36))
 

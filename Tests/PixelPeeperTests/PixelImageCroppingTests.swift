@@ -15,8 +15,8 @@ struct PixelImageCroppingTests {
         return PixelImage(width: 3, height: 3, pixels: pixels)
     }()
 
-    @Test("crops full image returns identical image")
-    func cropsFullImage() throws {
+    @Test
+    func `crops full image returns identical image`() throws {
         let cropped = try Self.testImage.cropped(x: 0, y: 0, width: 3, height: 3)
 
         #expect(cropped.width == 3)
@@ -24,8 +24,8 @@ struct PixelImageCroppingTests {
         #expect(cropped.pixels == Self.testImage.pixels)
     }
 
-    @Test("crops single pixel at origin")
-    func cropsSinglePixelAtOrigin() throws {
+    @Test
+    func `crops single pixel at origin`() throws {
         let cropped = try Self.testImage.cropped(x: 0, y: 0, width: 1, height: 1)
 
         #expect(cropped.width == 1)
@@ -33,8 +33,8 @@ struct PixelImageCroppingTests {
         #expect(cropped.pixels == [0, 0, 0, 255])
     }
 
-    @Test("crops single pixel at bottom-right")
-    func cropsSinglePixelAtBottomRight() throws {
+    @Test
+    func `crops single pixel at bottom-right`() throws {
         let cropped = try Self.testImage.cropped(x: 2, y: 2, width: 1, height: 1)
 
         #expect(cropped.width == 1)
@@ -43,8 +43,8 @@ struct PixelImageCroppingTests {
         #expect(cropped.pixels == [224, 224, 224, 255])
     }
 
-    @Test("crops a 2x2 region from center")
-    func cropsCenterRegion() throws {
+    @Test
+    func `crops a 2x2 region from center`() throws {
         let cropped = try Self.testImage.cropped(x: 1, y: 1, width: 2, height: 2)
 
         #expect(cropped.width == 2)
@@ -57,30 +57,30 @@ struct PixelImageCroppingTests {
         #expect(cropped.pixels == expected)
     }
 
-    @Test("clips region that extends beyond image bounds")
-    func clipsOverflowingRegion() throws {
+    @Test
+    func `clips region that extends beyond image bounds`() throws {
         let cropped = try Self.testImage.cropped(x: 2, y: 2, width: 5, height: 5)
 
         #expect(cropped.width == 1)
         #expect(cropped.height == 1)
     }
 
-    @Test("throws invalidCropRegion when region is entirely outside bounds")
-    func throwsForOutOfBoundsRegion() {
+    @Test
+    func `throws invalidCropRegion when region is entirely outside bounds`() {
         #expect(throws: PixelPeeperError.self) {
             try Self.testImage.cropped(x: 5, y: 5, width: 2, height: 2)
         }
     }
 
-    @Test("throws invalidCropRegion for zero-size region")
-    func throwsForZeroSizeRegion() {
+    @Test
+    func `throws invalidCropRegion for zero-size region`() {
         #expect(throws: PixelPeeperError.self) {
             try Self.testImage.cropped(x: 0, y: 0, width: 0, height: 1)
         }
     }
 
-    @Test("throws invalidCropRegion for negative dimensions")
-    func throwsForNegativeDimensions() {
+    @Test
+    func `throws invalidCropRegion for negative dimensions`() {
         #expect(throws: PixelPeeperError.self) {
             try Self.testImage.cropped(x: 0, y: 0, width: -1, height: 1)
         }

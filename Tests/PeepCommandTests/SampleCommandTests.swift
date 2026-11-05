@@ -6,8 +6,8 @@ import Testing
 struct SampleCommandTests {
     // MARK: - Argument parsing
 
-    @Test("parses image path and coordinates")
-    func parsesArguments() throws {
+    @Test
+    func `parses image path and coordinates`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "photo.png", "10", "20"])
         let sample = try #require(command as? SampleCommand)
 
@@ -16,40 +16,40 @@ struct SampleCommandTests {
         #expect(sample.y == 20)
     }
 
-    @Test("parses --format hex option")
-    func parsesFormatHex() throws {
+    @Test
+    func `parses --format hex option`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "a.png", "0", "0", "--format", "hex"])
         let sample = try #require(command as? SampleCommand)
 
         #expect(sample.format == .hex)
     }
 
-    @Test("parses --format text option")
-    func parsesFormatText() throws {
+    @Test
+    func `parses --format text option`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "a.png", "0", "0", "--format", "text"])
         let sample = try #require(command as? SampleCommand)
 
         #expect(sample.format == .text)
     }
 
-    @Test("parses --format json option")
-    func parsesFormatJSON() throws {
+    @Test
+    func `parses --format json option`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "a.png", "0", "0", "--format", "json"])
         let sample = try #require(command as? SampleCommand)
 
         #expect(sample.format == .json)
     }
 
-    @Test("parses --scale option")
-    func parsesScale() throws {
+    @Test
+    func `parses --scale option`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "a.png", "0", "0", "--scale", "3"])
         let sample = try #require(command as? SampleCommand)
 
         #expect(sample.scale == 3)
     }
 
-    @Test("defaults format to hex, scale to 2")
-    func defaults() throws {
+    @Test
+    func `defaults format to hex, scale to 2`() throws {
         let command = try PeepCommand.parseAsRoot(["sample", "a.png", "0", "0"])
         let sample = try #require(command as? SampleCommand)
 
@@ -59,16 +59,16 @@ struct SampleCommandTests {
 
     // MARK: - Output formatting
 
-    @Test("formats color as hex string")
-    func hexFormatting() {
+    @Test
+    func `formats color as hex string`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let output = SampleCommand.formatHex(color)
 
         #expect(output == "#804020ff")
     }
 
-    @Test("formats color as text with labeled channels")
-    func textFormatting() {
+    @Test
+    func `formats color as text with labeled channels`() {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let output = SampleCommand.formatText(color)
 
@@ -78,8 +78,8 @@ struct SampleCommandTests {
         #expect(output.contains("A: 255"))
     }
 
-    @Test("formats color as JSON with integer values")
-    func jsonFormatting() throws {
+    @Test
+    func `formats color as JSON with integer values`() throws {
         let color = PixelColor(red: 128, green: 64, blue: 32, alpha: 255)
         let output = try SampleCommand.formatJSON(color)
 
