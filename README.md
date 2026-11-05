@@ -2,32 +2,40 @@
 
 A Swift library and CLI tool for computing Mean Absolute Error (MAE) between two images.
 
+## Install
+
+```bash
+brew install bensyverson/tap/peep
+```
+
+On macOS 15 or later with Apple silicon, that pours a prebuilt, signed binary; anywhere else Homebrew builds it from source with Xcode 26.4 or later. From a checkout, `swift run peep` works without installing, and the examples below can use either.
+
 ## Quick Start
 
 ### CLI
 
 ```bash
 # Compare two images
-swift run peep compare before.png after.png
+peep compare before.png after.png
 
 # JSON output
-swift run peep compare before.png after.png --format json
+peep compare before.png after.png --format json
 
 # Resize on dimension mismatch (e.g., 1x vs 2x)
-swift run peep compare image-1x.png image-2x.png --resize
+peep compare image-1x.png image-2x.png --resize
 
 # CI threshold — exits non-zero if MAE > 5.0
-swift run peep compare expected.png actual.png --threshold 5.0
+peep compare expected.png actual.png --threshold 5.0
 
 # Box a region, in the coordinates that produced the image
-swift run peep outline shot.png --rect 10,20,100,50 --scale 2 --out boxed.png
+peep outline shot.png --rect 10,20,100,50 --scale 2 --out boxed.png
 
 # Sample pixel color at coordinates (0-indexed from top-left)
-swift run peep sample photo.png 10 20
+peep sample photo.png 10 20
 
 # Sample with different output formats
-swift run peep sample photo.png 10 20 --format text
-swift run peep sample photo.png 10 20 --format json
+peep sample photo.png 10 20 --format text
+peep sample photo.png 10 20 --format json
 ```
 
 ### Library
